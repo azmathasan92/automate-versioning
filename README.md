@@ -13,7 +13,7 @@ version: 1.9.9 -> version: 1.10.0
 This is an automation script to increment project version.
 
 
-Steps:
+How Script Works:
 ----------------------------------------------------
 * Get the current version from the file
 * Increment the version
