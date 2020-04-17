@@ -1,4 +1,7 @@
-CURRENT_VERSION=$(grep Version version | awk '{print $2}')
+FILE_NAME=$1
+BRANCH=$2
+
+CURRENT_VERSION=$(grep Version $FILE_NAME | awk '{print $2}')
 
 echo "Current Version: $CURRENT_VERSION"
 
@@ -10,8 +13,8 @@ NEW_VERSION=$(echo $CURRENT_VERSION |
 
 echo "Release Version: $NEW_VERSION"
 
-sed -i -e "s/^Version: [0-9].[0-99].[0-9]/Version: $NEW_VERSION/" version
+sed -i -e "s/^Version: [0-9].[0-99].[0-9]/Version: $NEW_VERSION/" $FILE_NAME
 
-git add version
-git commit -m "Update version to $NEW_VERSION"
-git push --set-upstream origin master
+git add $FILE_NAME
+git commit -m "Update Version to $NEW_VERSION"
+git push --set-upstream origin $BRANCH
