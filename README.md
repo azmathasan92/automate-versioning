@@ -3,7 +3,7 @@
 Version format should be version: 1.0.0
 
 Increment Version
-----------------------
+--------------------------------------------------
 version: 1.0.0 -> version: 1.0.1 
 
 version: 1.0.9 -> version: 1.1.0
@@ -19,3 +19,12 @@ How Script Works:
 * Increment the version
 * Commit that version 
 * push the new version to the repo
+
+How to Run:
+----------------------------------------------------
+
+./versioning.sh {Filename which contain version} {git branch where you want to push}
+
+For Example:
+
+versioning.sh version master
