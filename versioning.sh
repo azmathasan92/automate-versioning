@@ -3,6 +3,12 @@
 FILE_NAME=$1
 BRANCH=$2
 
+git checkout $BRANCH
+if [ $? -ne 0 ]; then
+  echo "FAILURE: Branch Does not exist"
+  exit 1
+fi
+
 CURRENT_VERSION=$(grep Version $FILE_NAME | awk '{print $2}')
 
 echo "Current Version: $CURRENT_VERSION"
@@ -26,3 +32,7 @@ NEW_VERSION="${major}.${minor}.${build}"
 echo "Release Version: $NEW_VERSION"
 
 sed -i -e "s/^Version:.*/Version: $NEW_VERSION/" $FILE_NAME
+
+git add $FILE_NAME
+git commit -m "Update version to ${VERSION}"
+git push origin $BRANCH
