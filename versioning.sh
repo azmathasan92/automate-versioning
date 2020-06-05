@@ -1,3 +1,5 @@
+#!/bin/bash
+
 FILE_NAME=$1
 BRANCH=$2
 
@@ -5,16 +7,22 @@ CURRENT_VERSION=$(grep Version $FILE_NAME | awk '{print $2}')
 
 echo "Current Version: $CURRENT_VERSION"
 
-NEW_VERSION=$(echo $CURRENT_VERSION |
-		  awk -F. -v OFS=. 'NF==1{print ++$NF};
-		  NF>1{if(length($NF+1)>length($NF))$(NF-1)++;
-		  $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF)));
-		  print}')
+major=$(echo $CURRENT_VERSION | awk -F. '{print $1}')
+minor=$(echo $CURRENT_VERSION | awk -F. '{print $2}')
+build=$(echo $CURRENT_VERSION | awk -F. '{print $3}')
+
+if [[ $BRANCH =~ "release" ]] ; then
+  major=$((major +1)) 
+elif [[ $BRANCH =~ "feature" ]] ; then
+  minor=$((minor +1)) 
+elif [[ $BRANCH =~ "bugfix" || $BRANCH =~ "patch" || $BRANCH =~ "hotfix" ]] ; then
+  build=$((build +1)) 
+else
+  echo "no need to update version"
+fi
+
+NEW_VERSION="${major}.${minor}.${build}"
 
 echo "Release Version: $NEW_VERSION"
 
-sed -i -e "s/^Version: [0-9].[0-99].[0-9]/Version: $NEW_VERSION/" $FILE_NAME
-
-git add $FILE_NAME
-git commit -m "Update Version to $NEW_VERSION"
-git push --set-upstream origin $BRANCH
+sed -i -e "s/^Version:.*/Version: $NEW_VERSION/" $FILE_NAME

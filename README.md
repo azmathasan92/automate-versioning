@@ -2,29 +2,32 @@
 
 Version format should be version: 1.0.0
 
-Increment Version
+Version Format [1.0.0] [major.minor.build]
 --------------------------------------------------
-version: 1.0.0 -> version: 1.0.1 
+Major Version
+Minior Version
+Build Version
 
-version: 1.0.9 -> version: 1.1.0
-
-version: 1.9.9 -> version: 1.10.0
-
-This is an automation script to increment project version.
+Process
+--------------------------------------------------
+1. When branch is release then this script will increment the major version.
+2. When branch is feature then this script will increment the minor version.
+3. Whne branch is bugfix, patch or hotfix then this script will increment the build version.
 
 
 How Script Works:
 ----------------------------------------------------
 * Get the current version from the file
-* Increment the version
+* Increment the version as per the branching startegy
 * Commit that version 
 * push the new version to the repo
 
 How to Run:
 ----------------------------------------------------
 
-./versioning.sh {Filename which contain version} {git branch where you want to push}
+./versioning.sh {Filename that contain Version} {git branch for the versioning}
 
 For Example:
-
-versioning.sh version master
+versioning.sh version release-v1.0 # Will increment the major version
+versioning.sh version feature/test # Will increment the minior version
+versioning.sh version patch # Will increment the build version
