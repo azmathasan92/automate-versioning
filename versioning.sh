@@ -36,3 +36,4 @@ sed -i -e "s/^Version:.*/Version: $NEW_VERSION/" $FILE_NAME
 git add $FILE_NAME
 git commit -m "Update version to ${VERSION}"
 git push origin $BRANCH
+
