@@ -59,7 +59,7 @@ echo "Release Version: $NEW_VERSION"
 sed -i -e "s/^Version:.*/Version: $NEW_VERSION/" $FileName
 
 git add $FileName
-git commit -m "Update version to ${VERSION}"
+git commit -m "Update version to $NEW_VERSION"
 git push origin develop
 
 }
