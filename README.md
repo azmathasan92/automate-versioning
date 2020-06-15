@@ -1,11 +1,13 @@
 # automate-versioning
 
-Version format should be version: 1.0.0
+Version format should be Version: 1.0.0
 
 Version Format [1.0.0] [major.minor.build]
 --------------------------------------------------
-Major Version
+Major Version 
+
 Minior Version
+
 Build Version
 
 Process
